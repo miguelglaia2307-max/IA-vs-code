@@ -36,6 +36,22 @@ class CentralLogger:
         # Error log file
         self.error_file = log_dir / "errors.jsonl"
     
+    def info(self, message: str):
+        """Log info message"""
+        self.logger.info(message)
+    
+    def debug(self, message: str):
+        """Log debug message"""
+        self.logger.debug(message)
+    
+    def warning(self, message: str):
+        """Log warning message"""
+        self.logger.warning(message)
+    
+    def error(self, message: str):
+        """Log error message"""
+        self.logger.error(message)
+    
     def log_error(self, error_type: str, message: str, context: Optional[Dict[str, Any]] = None, traceback_str: Optional[str] = None):
         """Log an error in both text and JSON format"""
         self.logger.error(f"{error_type}: {message}")
