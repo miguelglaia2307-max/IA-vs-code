@@ -21,6 +21,23 @@ services:
     networks:
       - app-network
 
+  # ---- Redis Cache & Message Broker ----
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis_password}
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-redis_password}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
   # ---- FastAPI Backend ----
   backend:
     build:
@@ -29,16 +46,20 @@ services:
     restart: unless-stopped
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER:-prompt_user}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-prompt_optimization}
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-redis_password}@redis:6379/0
       - OPENAI_API_KEY=${OPENAI_API_KEY:?Set OPENAI_API_KEY in .env.production}
       - SECRET_KEY=${SECRET_KEY:?Set SECRET_KEY in .env.production}
       - ALGORITHM=${ALGORITHM:-HS256}
       - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES:-30}
       - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost,http://localhost:3000}
+      - ENVIRONMENT=production
       - DEBUG=false
     ports:
       - "8000:8000"
     depends_on:
       postgres:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
@@ -46,6 +67,42 @@ services:
       timeout: 10s
       start_period: 10s
       retries: 3
+    networks:
+      - app-network
+
+  # ---- Celery Worker for Async Tasks ----
+  celery_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: celery -A app.services.async_tasks worker --loglevel=info
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-prompt_user}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-prompt_optimization}
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-redis_password}@redis:6379/0
+      - CELERY_BROKER_URL=redis://:${REDIS_PASSWORD:-redis_password}@redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://:${REDIS_PASSWORD:-redis_password}@redis:6379/2
+      - OPENAI_API_KEY=${OPENAI_API_KEY:?Set OPENAI_API_KEY in .env.production}
+    depends_on:
+      - postgres
+      - redis
+      - backend
+    networks:
+      - app-network
+
+  # ---- Flower for Celery Monitoring ----
+  flower:
+    image: mher/flower
+    restart: unless-stopped
+    command: celery --broker=redis://:${REDIS_PASSWORD:-redis_password}@redis:6379/1 --result-backend=redis://:${REDIS_PASSWORD:-redis_password}@redis:6379/2 flowers
+    ports:
+      - "5555:5555"
+    environment:
+      - CELERY_BROKER_URL=redis://:${REDIS_PASSWORD:-redis_password}@redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://:${REDIS_PASSWORD:-redis_password}@redis:6379/2
+    depends_on:
+      - redis
+      - celery_worker
     networks:
       - app-network
 
@@ -83,6 +140,7 @@ services:
 
 volumes:
   postgres_data:
+  redis_data:
 
 networks:
   app-network:
