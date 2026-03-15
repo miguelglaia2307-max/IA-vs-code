@@ -1,0 +1,45 @@
+2026-03-14 10:39:03,314 - prompt_optimizer - ERROR - ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+2026-03-14 10:39:03,316 - prompt_optimizer - INFO - AI analysis available
+2026-03-14 10:39:03,316 - prompt_optimizer - DEBUG - Context: {'error_type': 'ValueError'}
+2026-03-14 10:50:57,220 - prompt_optimizer - ERROR - UncaughtError: Uncaught Error: Text content does not match server-rendered HTML.
+2026-03-14 10:50:57,226 - prompt_optimizer - ERROR - UncaughtError: Uncaught Error: Text content does not match server-rendered HTML.
+See more info here: https://nextjs.org/docs/messages/react-hydration-error
+2026-03-14 10:50:57,229 - prompt_optimizer - ERROR - UncaughtError: Uncaught Error: Text content does not match server-rendered HTML.
+See more info here: https://nextjs.org/docs/messages/react-hydration-error
+2026-03-14 10:50:57,241 - prompt_optimizer - ERROR - UncaughtError: Uncaught Error: Text content does not match server-rendered HTML.
+See more info here: https://nextjs.org/docs/messages/react-hydration-error
+2026-03-14 10:50:57,245 - prompt_optimizer - ERROR - UncaughtError: Uncaught Error: Text content does not match server-rendered HTML.
+See more info here: https://nextjs.org/docs/messages/react-hydration-error
+2026-03-14 10:50:57,247 - prompt_optimizer - ERROR - UncaughtError: Uncaught Error: Text content does not match server-rendered HTML.
+See more info here: https://nextjs.org/docs/messages/react-hydration-error
+2026-03-14 10:50:57,257 - prompt_optimizer - ERROR - UncaughtError: Uncaught Error: There was an error while hydrating. Because the error happened outside of a Suspense boundary, the entire root will switch to client rendering.
+2026-03-14 10:51:15,741 - prompt_optimizer - ERROR - ResponseValidationError: 9 validation errors:
+  {'type': 'datetime_type', 'loc': ('response', 0, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 1, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 2, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 3, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 4, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 5, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 6, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 7, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 8, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+
+  File "C:\Users\User1\.vscode\my-web-app\backend\app\api\projects.py", line 24, in list_projects
+    GET /api/projects/
+2026-03-14 10:51:15,741 - prompt_optimizer - INFO - AI analysis available
+2026-03-14 10:51:15,742 - prompt_optimizer - DEBUG - Context: {'error_type': 'ResponseValidationError'}
+2026-03-14 10:51:15,758 - prompt_optimizer - ERROR - ResponseValidationError: 9 validation errors:
+  {'type': 'datetime_type', 'loc': ('response', 0, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 1, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 2, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 3, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 4, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 5, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 6, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 7, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+  {'type': 'datetime_type', 'loc': ('response', 8, 'updated_at'), 'msg': 'Input should be a valid datetime', 'input': None}
+
+  File "C:\Users\User1\.vscode\my-web-app\backend\app\api\projects.py", line 24, in list_projects
+    GET /api/projects/
+2026-03-14 10:51:15,759 - prompt_optimizer - INFO - AI analysis available
+2026-03-14 10:51:15,760 - prompt_optimizer - DEBUG - Context: {'error_type': 'ResponseValidationError'}

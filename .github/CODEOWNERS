@@ -1,0 +1,21 @@
+# CODEOWNERS for repository management
+
+# Default owner(s)
+* @you
+
+# Frontend code
+/frontend/ @you
+/frontend/**/*.tsx @you
+/frontend/**/*.ts @you
+
+# Backend code
+/backend/ @you
+/backend/**/*.py @you
+
+# Configuration
+/.github/ @you
+/docker-compose*.yml @you
+nginx.conf @you
+
+# Documentation
+*.md @you
