@@ -13,7 +13,7 @@ psycopg2-binary==2.9.9
 python-dotenv==1.0.0
 
 # API Dependencies
-httpx==0.25.1
+httpx==0.28.1
 python-multipart==0.0.6
 
 # AI & LLM Integration
