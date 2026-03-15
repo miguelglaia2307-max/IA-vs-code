@@ -24,7 +24,7 @@ embedchain==0.1.0
 
 # Security & Authentication
 passlib[pbkdf2]==1.7.4
-python-jose[cryptography]==3.3.0
+python-jose[cryptography]==3.5.0
 PyJWT==2.12.1
 
 # Production Server
