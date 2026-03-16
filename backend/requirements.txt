@@ -32,7 +32,7 @@ gunicorn==21.1.0
 whitenoise==6.6.0
 
 # Caching & Performance
-redis==5.0.1
+redis==7.3.0
 hiredis==2.2.3
 
 # Async Task Queue
